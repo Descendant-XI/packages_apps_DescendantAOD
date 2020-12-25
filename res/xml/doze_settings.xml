@@ -19,13 +19,35 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:key="always_on_display"
-        android:disableDependentsState="true"
-        android:icon="@drawable/ic_doze_aod"
-        android:title="@string/ambient_display_always_on_title"
-        android:summary="@string/ambient_display_always_on_summary"
-        android:persistent="false" />
+    <PreferenceCategory
+        settings:allowDividerBelow="false"
+        settings:allowDividerAbove="false"
+        android:key="display_modes"
+        android:title="Display modes and features">
+
+        <SwitchPreference
+            android:key="always_on_display"
+            android:disableDependentsState="true"
+            android:icon="@drawable/ic_doze_aod"
+            android:title="@string/ambient_display_always_on_title"
+            android:summary="@string/ambient_display_always_on_summary"
+            android:persistent="false" />
+
+        <org.descendant.support.preferences.SystemSettingSwitchPreference
+            android:key="doze_enabled"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_ambient_display_notification"
+            android:title="@string/doze_title"
+            android:summary="@string/doze_summary" />
+
+        <org.descendant.support.preferences.SecureSettingSwitchPreference
+            android:key="pulse_on_new_tracks"
+            android:defaultValue="false"
+            android:icon="@drawable/ic_pulse_on_new_tracks"
+            android:title="@string/pulse_on_new_tracks_title"
+            android:summary="@string/pulse_on_new_tracks_summary"/>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         settings:allowDividerBelow="false"
@@ -68,5 +90,30 @@
             android:summary="@string/pocket_gesture_summary" />
 
     </PreferenceCategory>
+
+        <PreferenceCategory
+            settings:allowDividerBelow="false"
+            settings:allowDividerAbove="false"
+            android:key="descendant_clock_flow_category"
+            android:title="@string/descendant_clock_flow_category_title">
+
+            <org.descendant.support.preferences.SystemSettingSwitchPreference
+                android:key="descendant_clock_flow"
+                android:icon="@drawable/ic_descendant_clock_flow"
+                android:title="@string/descendant_clock_flow_title"
+                android:summary="@string/descendant_clock_flow_summary"
+                android:defaultValue="false" />
+
+            <org.descendant.support.preferences.SystemSettingListPreference
+                android:key="descendant_clock_flow_selector"
+                android:dependency="descendant_clock_flow"
+                android:icon="@drawable/ic_descendant_clock_flow_selection"
+                android:title="@string/descendant_clock_flow_selector_title"
+                android:entries="@array/descendant_clock_flow_selector_entries"
+                android:entryValues="@array/descendant_clock_flow_selector_values"
+                android:defaultValue="0"
+                android:persistent="false" />
+
+        </PreferenceCategory>
 
 </PreferenceScreen>

@@ -45,8 +45,8 @@ import org.descendant.settings.R;
 public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener,
         CompoundButton.OnCheckedChangeListener {
 
-    private TextView mTextView;
-    private View mSwitchBar;
+    //private TextView mTextView;
+    //private View mSwitchBar;
 
     private SwitchPreference mAlwaysOnDisplayPreference;
 
@@ -128,19 +128,19 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
 
         boolean dozeEnabled = DozeUtils.isDozeEnabled(getActivity());
 
-        mTextView = view.findViewById(R.id.switch_text);
-        mTextView.setText(getString(dozeEnabled ?
-                R.string.switch_bar_on : R.string.switch_bar_off));
+        //mTextView = view.findViewById(R.id.switch_text);
+        //mTextView.setText(getString(dozeEnabled ?
+        //        R.string.switch_bar_on : R.string.switch_bar_off));
 
-        mSwitchBar = view.findViewById(R.id.switch_bar);
-        Switch switchWidget = mSwitchBar.findViewById(android.R.id.switch_widget);
-        switchWidget.setChecked(dozeEnabled);
-        switchWidget.setOnCheckedChangeListener(this);
-        mSwitchBar.setActivated(dozeEnabled);
+        //mSwitchBar = view.findViewById(R.id.switch_bar);
+        //Switch switchWidget = mSwitchBar.findViewById(android.R.id.switch_widget);
+        //switchWidget.setChecked(dozeEnabled);
+        //switchWidget.setOnCheckedChangeListener(this);
+        /*mSwitchBar.setActivated(dozeEnabled);
         mSwitchBar.setOnClickListener(v -> {
             switchWidget.setChecked(!switchWidget.isChecked());
             mSwitchBar.setActivated(switchWidget.isChecked());
-        });
+        });*/
     }
 
     @Override
@@ -159,17 +159,16 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         DozeUtils.enableDoze(getActivity(), isChecked);
         DozeUtils.checkDozeService(getActivity());
 
-        mTextView.setText(getString(isChecked ? R.string.switch_bar_on : R.string.switch_bar_off));
-        mSwitchBar.setActivated(isChecked);
+        //mTextView.setText(getString(isChecked ? R.string.switch_bar_on : R.string.switch_bar_off));
+        //mSwitchBar.setActivated(isChecked);
 
         if (!isChecked) {
             DozeUtils.enableAlwaysOn(getActivity(), false);
             mAlwaysOnDisplayPreference.setChecked(false);
         }
         mAlwaysOnDisplayPreference.setEnabled(isChecked);
-
-        mPickUpPreference.setEnabled(isChecked);
-        mRaiseToWakePreference.setEnabled(isChecked);
+        //mPickUpPreference.setEnabled(isChecked);
+        //mRaiseToWakePreference.setEnabled(isChecked);
         mHandwavePreference.setEnabled(isChecked);
         mPocketPreference.setEnabled(isChecked);
     }

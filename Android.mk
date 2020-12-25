@@ -7,6 +7,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+include vendor/support/common.mk
 
 LOCAL_MODULE_TAGS := optional
 
@@ -21,7 +22,8 @@ LOCAL_USE_AAPT2 := true
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.core_core \
-    androidx.preference_preference
+    androidx.preference_preference \
+    VendorSupportLib
 
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res \

@@ -31,7 +31,7 @@
         android:targetSdkVersion="24"/>
 
     <application
-        android:label="@string/device_settings_app_name"
+        android:label="@string/descendant_aod"
         android:persistent="true">
 
         <receiver android:name=".BootCompletedReceiver">
@@ -48,7 +48,7 @@
 
         <activity
             android:name=".doze.DozeSettingsActivity"
-            android:label="@string/ambient_display_title"
+            android:label="@string/descendant_aod"
             android:theme="@style/Theme.Main">
             <intent-filter>
                 <action android:name="org.descendant.settings.device.DOZE_SETTINGS" />

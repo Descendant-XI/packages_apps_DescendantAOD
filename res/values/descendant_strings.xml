@@ -1,0 +1,27 @@
+<resources>
+    <string name="descendant_aod">Ambient Display and Sensors</string>
+    <!-- Descendant Clock Flow -->
+    <string name="descendant_clock_flow_category_title">Descendant Clock Flow</string>
+    <string name="descendant_clock_flow_title">Enable Clock Flow</string>
+    <string name="descendant_clock_flow_summary">Enabling Descendant Clock Flow will provide a new way to discretely see which app you\'ve received a notification from, on lockscreen and ambient notifications</string>
+    <string name="descendant_clock_flow_selection">Select Descendant Clock Flow style</string>
+    <!-- Descendant Clock Flow Selector -->
+    <string name="descendant_clock_flow_selector_title">Descendant Clock Flow Themes</string>
+    <string name="descendant_clock_flow_selector_default">Default</string>
+    <string name="descendant_clock_flow_selector_descendant">Descendant</string>
+    <string name="descendant_clock_flow_selector_swan">Swan</string>
+    <string name="descendant_clock_flow_selector_chameleon">Chameleon</string>
+    <string name="descendant_clock_flow_selector_venetian_mask">Venetian Mask</string>
+    <string name="descendant_clock_flow_selector_birdie">Birdie</string>
+    <string name="descendant_clock_flow_selector_cityline">City Line</string>
+    <string name="descendant_clock_flow_selector_earth">Earth</string>
+    <string name="descendant_clock_flow_selector_moon">Moon</string>
+    <string name="descendant_clock_flow_selector_pinwheel">Pinwheel</string>
+    <string name="doze_title">Wake screen for notifications</string>
+    <string name="doze_summary">When screen is dark, it turns on for new notifications</string>
+    <string name="pulse_on_new_tracks_title">Ambient music ticker</string>
+    <string name="pulse_on_new_tracks_summary">Show Ambient Display when a new music track is played. Double tap on track info to skip to next track.</string>
+    <!-- Pick-up to wake gesture-->
+    <string name="wake_gesture_title">Wake up</string>
+    <string name="wake_gesture_summary">Wake up the device instead of pulsing notifications</string>
+</resources>
