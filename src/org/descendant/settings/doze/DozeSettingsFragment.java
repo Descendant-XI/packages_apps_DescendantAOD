@@ -17,6 +17,7 @@
 
 package org.descendant.settings.doze;
 
+import com.android.settingslib.core.AbstractPreferenceController;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
@@ -42,12 +45,17 @@ import androidx.preference.SwitchPreference;
 
 import org.descendant.settings.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener,
         CompoundButton.OnCheckedChangeListener {
 
+    private static final String DESCENDANT_CLOCK_FLOW_SELECTOR = "descendant_clock_flow_selector";
+
     //private TextView mTextView;
     //private View mSwitchBar;
-
+    private ListPreference mClockFlowStyle;
     private SwitchPreference mAlwaysOnDisplayPreference;
 
     private SwitchPreference mPickUpPreference;
@@ -70,6 +78,14 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         }
 
         boolean dozeEnabled = DozeUtils.isDozeEnabled(getActivity());
+
+        mClockFlowStyle = (ListPreference) findPreference(DESCENDANT_CLOCK_FLOW_SELECTOR);
+        int ClockFlowStyle = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.DESCENDANT_CLOCK_FLOW_SELECTOR, 0);
+        int valueIndex = mClockFlowStyle.findIndexOfValue(String.valueOf(ClockFlowStyle));
+        mClockFlowStyle.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
+        mClockFlowStyle.setSummary(mClockFlowStyle.getEntry());
+        mClockFlowStyle.setOnPreferenceChangeListener(this);
 
         mAlwaysOnDisplayPreference = (SwitchPreference) findPreference(DozeUtils.ALWAYS_ON_DISPLAY);
         mAlwaysOnDisplayPreference.setEnabled(dozeEnabled);
@@ -148,6 +164,12 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         if (DozeUtils.ALWAYS_ON_DISPLAY.equals(preference.getKey())) {
             DozeUtils.enableAlwaysOn(getActivity(), (Boolean) newValue);
         }
+        if (preference == mClockFlowStyle) {
+            String value = (String) newValue;
+            Settings.System.putInt(getContext().getContentResolver(), Settings.System.DESCENDANT_CLOCK_FLOW_SELECTOR, Integer.valueOf(value));
+            int valueIndex = mClockFlowStyle.findIndexOfValue(value);
+            mClockFlowStyle.setSummary(mClockFlowStyle.getEntries()[valueIndex]);
+        }
 
         mHandler.post(() -> DozeUtils.checkDozeService(getActivity()));
 
@@ -205,4 +227,5 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         HelpDialogFragment fragment = new HelpDialogFragment();
         fragment.show(getFragmentManager(), "help_dialog");
     }
+
 }

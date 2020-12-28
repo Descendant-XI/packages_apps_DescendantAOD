@@ -104,7 +104,7 @@
                 android:summary="@string/descendant_clock_flow_summary"
                 android:defaultValue="false" />
 
-            <org.descendant.support.preferences.SystemSettingListPreference
+            <ListPreference
                 android:key="descendant_clock_flow_selector"
                 android:dependency="descendant_clock_flow"
                 android:icon="@drawable/ic_descendant_clock_flow_selection"
