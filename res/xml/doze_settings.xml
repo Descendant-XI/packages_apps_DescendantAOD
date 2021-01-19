@@ -33,7 +33,7 @@
             android:summary="@string/ambient_display_always_on_summary"
             android:persistent="false" />
 
-        <org.descendant.support.preferences.SystemSettingSwitchPreference
+        <org.descendant.support.preferences.SecureSettingSwitchPreference
             android:key="doze_enabled"
             android:defaultValue="false"
             android:icon="@drawable/ic_ambient_display_notification"
