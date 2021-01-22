@@ -17,6 +17,8 @@
 
 package org.descendant.settings.doze;
 
+import org.descendant.settings.R;
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -35,12 +37,13 @@ public class PickupSensor implements SensorEventListener {
 
     private static final boolean DEBUG = false;
     private static final String TAG = "PickupSensor";
-
+    private static final String AMD = "qti.sensor.amd";
     private static final int MIN_PULSE_INTERVAL_MS = 2500;
     private static final int WAKELOCK_TIMEOUT_MS = 300;
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
+    private String mSensorName;
     private Context mContext;
     private ExecutorService mExecutorService;
     private PowerManager mPowerManager;
@@ -51,7 +54,8 @@ public class PickupSensor implements SensorEventListener {
     public PickupSensor(Context context) {
         mContext = context;
         mSensorManager = mContext.getSystemService(SensorManager.class);
-        mSensor = DozeUtils.getSensor(mSensorManager, "xiaomi.sensor.pickup");
+        mSensorName = mContext.getResources().getString(R.string.config_pickup_sensor);
+        mSensor = DozeUtils.getSensor(mSensorManager, mSensorName);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
         mExecutorService = Executors.newSingleThreadExecutor();
@@ -66,9 +70,10 @@ public class PickupSensor implements SensorEventListener {
         boolean isRaiseToWake = DozeUtils.isRaiseToWakeEnabled(mContext);
         boolean isAOD = DozeUtils.isAlwaysOnEnabled(mContext);
         if (DEBUG) Log.d(TAG, "Got sensor event: " + event.values[0]);
+        Log.d(TAG, "Sensor name: " + mSensorName);
 
         long delta = SystemClock.elapsedRealtime() - mEntryTimestamp;
-        if (delta < MIN_PULSE_INTERVAL_MS) {
+        if (delta < MIN_PULSE_INTERVAL_MS && mSensorName != AMD) {
             return;
         }
 
@@ -76,7 +81,9 @@ public class PickupSensor implements SensorEventListener {
 
         if (event.values[0] == 1) {
             if (isRaiseToWake || isAOD) {
-                mWakeLock.acquire(WAKELOCK_TIMEOUT_MS);
+                if (mSensorName != AMD) {
+                    mWakeLock.acquire(WAKELOCK_TIMEOUT_MS);
+                }
                 mPowerManager.wakeUp(SystemClock.uptimeMillis(),
                     PowerManager.WAKE_REASON_GESTURE, TAG);
             } else {
