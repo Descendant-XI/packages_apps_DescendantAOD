@@ -88,7 +88,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         mClockFlowStyle.setOnPreferenceChangeListener(this);
 
         mAlwaysOnDisplayPreference = (SwitchPreference) findPreference(DozeUtils.ALWAYS_ON_DISPLAY);
-        mAlwaysOnDisplayPreference.setEnabled(dozeEnabled);
+        mAlwaysOnDisplayPreference.setEnabled(DozeUtils.alwaysOnDisplayAvailable(getActivity()));
         mAlwaysOnDisplayPreference.setChecked(DozeUtils.isAlwaysOnEnabled(getActivity()));
         mAlwaysOnDisplayPreference.setOnPreferenceChangeListener(this);
 
