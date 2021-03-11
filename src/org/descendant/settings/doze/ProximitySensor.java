@@ -59,9 +59,11 @@ public class ProximitySensor implements SensorEventListener {
     public ProximitySensor(Context context) {
         mContext = context;
         String customProximity = mContext.getResources().getString(R.string.config_custom_proximity);
+        Log.d("Dil3mm4OP", "value of CustomProximity" + String.valueOf(customProximity));
         mSensorManager = mContext.getSystemService(SensorManager.class);
         mSensor = customProximity.isEmpty() ? mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY,false)
                                                                       : DozeUtils.getSensor(mSensorManager, customProximity);
+        Log.d("Dil3mm4OP", "value of mSensor" + String.valueOf(mSensor));
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
         mExecutorService = Executors.newSingleThreadExecutor();
