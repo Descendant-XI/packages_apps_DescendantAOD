@@ -24,4 +24,7 @@
     <!-- Pick-up to wake gesture-->
     <string name="wake_gesture_title">Wake up</string>
     <string name="wake_gesture_summary">Wake up the device instead of pulsing notifications</string>
+    <!-- Double tap -->
+    <string name="double_tap_on_doze_to_wake_title">Double-tap to wake on doze</string>
+    <string name="double_tap_on_doze_to_wake_summary">Double tap to wake when device is dreaming</string>
 </resources>

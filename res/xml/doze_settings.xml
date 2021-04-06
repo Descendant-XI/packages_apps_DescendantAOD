@@ -47,6 +47,13 @@
             android:title="@string/pulse_on_new_tracks_title"
             android:summary="@string/pulse_on_new_tracks_summary"/>
 
+        <org.descendant.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_pulse_on_double_tap"
+            android:title="@string/double_tap_on_doze_to_wake_title"
+            android:summary="@string/double_tap_on_doze_to_wake_summary"
+            android:icon="@drawable/ic_dt2w_doze"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
